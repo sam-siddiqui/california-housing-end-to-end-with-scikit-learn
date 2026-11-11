@@ -51,8 +51,23 @@ def explore_correlations(df):
     return median_corr.sort_values(ascending=False)
     pass
 
-# Step 5 - add_ratio_features (not yet solved)
-# TODO: implement
+# Step 5 - add_ratio_features
+def add_ratio_features(df):
+    # TODO: Return a copy with rooms_per_house, bedrooms_ratio and people_per_house columns added.
+    new_df = df.copy(deep=True)
+
+    ratio = lambda num, den: lambda d: d[num] / d[den]
+    ratio_dict = {
+        'rooms_per_house':  ratio('total_rooms', 'households'),
+        'bedrooms_ratio':   ratio('total_bedrooms', 'total_rooms'),
+        'people_per_house': ratio('population', 'households')
+    }
+    
+    return new_df.assign(
+        **{col: func(new_df) for col, func in ratio_dict.items()}
+        # Unpacks it to a keyword arguments
+    )
+    pass
 
 # Step 6 - split_features_labels (not yet solved)
 # TODO: implement
