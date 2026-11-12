@@ -262,8 +262,23 @@ def bootstrap_rmse_ci(y_true, y_pred, n_boot=200, alpha=0.05, random_state=42):
     return np.percentile(rmses, 100*alpha/2), np.percentile(rmses, 100*(1-alpha/2)) 
     pass
 
-# Step 19 - feature_importances (not yet solved)
-# TODO: implement
+# Step 19 - feature_importances
+def feature_importances(search, k=5):
+    # TODO: top-k (importance, name) tuples from the best estimator, importances rounded to 3 decimals.
+    return sorted(
+        (
+            (round(importance, 3), name) 
+            for importance, name in 
+            zip(
+                search.best_estimator_.steps[-1][1].feature_importances_, 
+                search.best_estimator_[:-1].get_feature_names_out()
+            )
+        ), 
+        
+        reverse=True, 
+        key=lambda tup: tup[0]
+    )[:k]
+    pass
 
 # Step 20 - worst_errors (not yet solved)
 # TODO: implement
