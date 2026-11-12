@@ -126,8 +126,18 @@ def numeric_pipeline():
     )
     pass
 
-# Step 9 - categorical_pipeline (not yet solved)
-# TODO: implement
+# Step 9 - categorical_pipeline
+def categorical_pipeline():
+    # TODO: make_pipeline(SimpleImputer(most_frequent), OneHotEncoder(handle_unknown='ignore'))
+    from sklearn.impute import SimpleImputer
+    from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
+    from sklearn.pipeline import make_pipeline
+
+    return make_pipeline(
+        SimpleImputer(strategy="most_frequent", missing_values=None),
+        OneHotEncoder(handle_unknown="ignore")
+    )
+    pass
 
 # Step 10 - build_preprocessing (not yet solved)
 # TODO: implement
