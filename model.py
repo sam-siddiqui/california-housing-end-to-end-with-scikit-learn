@@ -227,8 +227,8 @@ def random_search(pipeline, X, y, n_iter=5, cv=3, random_state=42):
     # TODO: RandomizedSearchCV over geo n_clusters 3..10 and forest max_features 2..8; fit and return it.
     from sklearn.model_selection import RandomizedSearchCV
     param_dist = {
-        'columntransformer__geo__n_clusters' : range(3, 11),
-        'randomforestregressor__max_features': range(2, 9)
+        'columntransformer__geo__n_clusters' : range(3, 11), # Use the elbow method
+        'randomforestregressor__max_features': range(2, 9)   # ~sqrt(p)
     }
     random_search = RandomizedSearchCV(
         estimator=pipeline,
