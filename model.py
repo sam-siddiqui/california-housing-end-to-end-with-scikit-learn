@@ -222,8 +222,26 @@ def forest_model(preprocessing, n_estimators=50, random_state=42):
     return make_pipeline(preprocessing, RandomForestRegressor(n_estimators=n_estimators, random_state=random_state))
     pass
 
-# Step 16 - random_search (not yet solved)
-# TODO: implement
+# Step 16 - random_search
+def random_search(pipeline, X, y, n_iter=5, cv=3, random_state=42):
+    # TODO: RandomizedSearchCV over geo n_clusters 3..10 and forest max_features 2..8; fit and return it.
+    from sklearn.model_selection import RandomizedSearchCV
+    param_dist = {
+        'columntransformer__geo__n_clusters' : range(3, 11),
+        'randomforestregressor__max_features': range(2, 9)
+    }
+    random_search = RandomizedSearchCV(
+        estimator=pipeline,
+        param_distributions=param_dist,
+        n_iter=n_iter,
+        cv=cv,
+        random_state=random_state,
+        scoring="neg_root_mean_squared_error",
+        n_jobs=-1
+    )
+    random_search.fit(X, y)
+    return random_search
+    pass
 
 # Step 17 - test_rmse (not yet solved)
 # TODO: implement
