@@ -280,8 +280,22 @@ def feature_importances(search, k=5):
     )[:k]
     pass
 
-# Step 20 - worst_errors (not yet solved)
-# TODO: implement
+# Step 20 - worst_errors
+def worst_errors(model, df, k=5):
+    # TODO: DataFrame of the k largest absolute errors with columns actual, predicted, abs_error.
+    col_name = 'median_house_value'
+    X, y = split_features_labels(add_ratio_features(df))
+    y_true = y
+    y_pred = model.predict(X)
+
+    new_df = pd.DataFrame({
+        'actual': y_true,
+        'predicted': y_pred,
+        'abs_error': abs(y_pred - y_true)
+    }, index=df.index)
+    new_df = new_df.sort_values(by='abs_error', ascending=False)
+    return new_df.iloc[:k]
+    pass
 
 # Step 21 - save_and_reload (not yet solved)
 # TODO: implement
