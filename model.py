@@ -254,6 +254,7 @@ def test_rmse(model, test_set):
 def bootstrap_rmse_ci(y_true, y_pred, n_boot=200, alpha=0.05, random_state=42):
     # TODO: bootstrap the RMSE by resampling index pairs; return (low, high) percentiles as floats.
     rmses = []
+    y_true, y_pred = np.array(y_true), np.array(y_pred)
     rng = np.random.default_rng(random_state)
     for i in range(n_boot):
         indices = rng.integers(0, len(y_true), len(y_true))
