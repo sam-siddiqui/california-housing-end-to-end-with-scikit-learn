@@ -206,8 +206,13 @@ def cross_val_rmse(model, X, y, cv=3):
     }
     pass
 
-# Step 14 - linear_model (not yet solved)
-# TODO: implement
+# Step 14 - linear_model
+def linear_model(preprocessing):
+    # TODO: make_pipeline(preprocessing, LinearRegression())
+    from sklearn.pipeline import make_pipeline
+    from sklearn.linear_model import LinearRegression
+    return make_pipeline(preprocessing, LinearRegression())
+    pass
 
 # Step 15 - forest_model (not yet solved)
 # TODO: implement
